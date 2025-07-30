@@ -2,11 +2,9 @@ const CACHE_NAME = 'financial-app-v1.0.0';
 const urlsToCache = [
     '/',
     '/offline.html',
-    '/manifest.json',
-    'https://cdn.jsdelivr.net/npm/chart.js',
-    'https://cdn.jsdelivr.net/npm/sweetalert2@11',
-    'https://cdn.tailwindcss.com',
-    'https://code.jquery.com/jquery-3.7.1.min.js'
+    '/manifest.json'
+    // '/css/app.css', // Uncomment if exists
+    // '/js/app.js',   // Uncomment if exists
 ];
 
 // Install event - cache resources
@@ -14,8 +12,10 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Opened cache');
                 return cache.addAll(urlsToCache);
+            })
+            .catch(err => {
+                console.error('Cache addAll error:', err);
             })
     );
 });
